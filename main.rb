@@ -1,6 +1,6 @@
 require_relative 'pawns'
 require 'gosu'
-class Main
+class Window < Gosu::Window
 	def initialize
 		self.caption "Chess Wizard Master"
 
@@ -11,3 +11,6 @@ class Main
 		close if id == Gosu::Kb
 	end
 end
+
+window = Window.new
+window.show
