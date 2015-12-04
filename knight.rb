@@ -1,14 +1,10 @@
-require_relative 'pieces'
-
-class Pawns
+class Knight
 	def initialize
 		@x = @y
 	end
 
 	def draw
-		piece = pawn
+		piece = knight
 		draw.pieces
 	end
-
-
 end
