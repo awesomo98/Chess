@@ -8,7 +8,7 @@ class Window < Gosu::Window
 		super 363, 335
 		self.caption = "Chess Wizard Master"
 
-		@background_image = Gosu::Image.new("images/Board.jpg")
+		@background_image = Gosu::Image.new("Board.jpg")
 	end
 
 	def button_down(id)
