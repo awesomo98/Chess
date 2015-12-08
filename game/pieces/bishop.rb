@@ -12,7 +12,7 @@ class Bishop < Piece
 		diagonal(position, position_final)
 	end
 
-	def can_eat?(position_enemy)
-		can_move?(position_enemy)
+	def can_eat?(enemy_position)
+		can_move?(enemy_position)
 	end
 end

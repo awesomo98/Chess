@@ -1,12 +1,13 @@
-require_relative 'pieces.rb'
+class Queen < Piece
+	include Calculations
 
-class Queen
-	def initialize
-		@x = @y
+	def initialize(color, position)
+		super(color, position)
 	end
 
-	def draw
-		piece = queen
-		draw.pieces
+	def can_move?(position_final)
+		
 	end
+
+
 end

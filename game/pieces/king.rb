@@ -1,12 +1,17 @@
-class King
-	def initialize
-		@x = @y
-		@white_image = Gosu::Image.new("pieces/white/king.png")
-		@black_image = Gosu::Image.new("pieces/black/king.png")
+class King < Piece
+	include Calculations
+
+	def initialize(color, position)
+		super(color, position)
 	end
 
-	def draw
-		piece = king
-		draw.pieces
+	def can_move?(position_final)
+		position_change(position, position_final).all? do |diff|
+			diff.abs <= 1
 	end
+
+	def can_eat?(enemy_position)
+		can_move?(enemy_position)
+	end
+	
 end

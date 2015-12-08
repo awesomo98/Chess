@@ -1,10 +1,11 @@
-class Rook
-	def initialize
-		@x = @y
+class Rook < Piece
+	include Calculations
+
+	def initialize(color, position)
+		super(color, position)
 	end
 
-	def draw
-		piece = rook
-		draw.pieces
+	def can_move?(position_final)
+		
 	end
 end

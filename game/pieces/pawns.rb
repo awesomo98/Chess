@@ -1,14 +1,11 @@
-require_relative 'pieces'
+class Pawns < Piece
+	include	Calculations
 
-class Pawns
-	def initialize
-		@x = @y
+	def initialize(color, position)
+		super(color, position)
 	end
 
-	def draw
-		piece = pawn
-		draw.pieces
+	def can_move?(position_final)
+		
 	end
-
-
 end
