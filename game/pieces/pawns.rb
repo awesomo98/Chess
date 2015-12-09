@@ -8,4 +8,8 @@ class Pawns < Piece
 	def can_move?(position_final)
 		
 	end
+
+	def can_eat?(enemy_position)
+		
+	end
 end
