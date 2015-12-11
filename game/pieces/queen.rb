@@ -10,7 +10,7 @@ class Queen < Piece
 	end
 
 	def can_eat?(enemy_position)
-		
+		can_move(enemy_position)
 	end
 
 

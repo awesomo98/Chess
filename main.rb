@@ -39,10 +39,6 @@ class Window < Gosu::Window
 		@moves = game.get_legal_moves(@selected_piece) if @selected_piece
 	end
 
-	def update
-		
-	end
-
 	def draw
 		@background_image.draw(0, 0, ZOrder::BACKGROUND)
 		draw_pieces
@@ -64,8 +60,37 @@ class Window < Gosu::Window
 	def draw_possible_moves
 		return unless @selected_piece
 		@moves.each do |move|
+			y, x = Piece.position_to_array_indexes(move).collect { |index| index * 90 }
+			if game.board.piece_at(move)
+				transparency = 0x88ffffff
+			else
+				transparency = 0x33ffffff
+			end
+			find_piece_image(@selected_piece.file_loc).draw(x, y, 0, 1, transparency)
+		end
+	end
+
+	def draw_pieces(pieces = game.board.pieces.reject { |piece| piece == @selected_piece} )
+		pieces.each do |piece|
+			y, x = piece.to_array_indexes.collect { |index| index * 90 }
+			unless @selecter_piece && @moves.include?(piece.location)
+				find_piece_image(piece.file_loc).draw(x, y, ZOrder::PIECES)
+			else
+				find_piece_image(piece.file_loc.draw(x, y, 0, 1, 1, 0x33ffffff)
+			end
+		end
+	end
+
+	def create_pieces
+		@piece_images = piece_image_locations.collect { |path| Gosu::Image.new(self, "assets/#{path}.png", true) }
+	end
+
+	def location_of_mouse(start_x = 0, start_y = 0)
+		x = 8 - ((self.mouse_y))
 		
 	end
+
+
 end
 
 window = Window.new
