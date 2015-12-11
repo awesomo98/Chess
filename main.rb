@@ -76,18 +76,23 @@ class Window < Gosu::Window
 			unless @selecter_piece && @moves.include?(piece.location)
 				find_piece_image(piece.file_loc).draw(x, y, ZOrder::PIECES)
 			else
-				find_piece_image(piece.file_loc.draw(x, y, 0, 1, 1, 0x33ffffff)
+				find_piece_image(piece.file_loc.draw(x, y, 0, 1, 1, 0x33ffffff))
 			end
 		end
 	end
 
 	def create_pieces
-		@piece_images = piece_image_locations.collect { |path| Gosu::Image.new(self, "assets/#{path}.png", true) }
+		@piece_images = piece_image_positions.collect { |path| Gosu::Image.new(self, "assets/#{path}.png", true) }
 	end
 
-	def location_of_mouse(start_x = 0, start_y = 0)
-		x = 8 - ((self.mouse_y))
-		
+	def mouse_position(start_x = 0, start_y = 0)
+		x = 8 - ((self.mouse_y - start_x) / 90).to_i
+		y = ((self.mouse_x - start_y) / 90).to_i + 65
+		"#{y.chr}#{x}"	
+	end
+
+	def find_piece_image(file_loc)
+		@piece_images[piece_image_positions]
 	end
 
 
