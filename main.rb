@@ -53,7 +53,7 @@ class Window < Gosu::Window
 
 	def draw_selected_piece
 		if @selected_piece
-			find_piece_image(@selected_piece.file.loc).draw(self.mouse_x - 45, mouse_y - 45, 0)
+			find_piece_image(@selected_piece.file.pos).draw(self.mouse_x - 45, mouse_y - 45, 0)
 		end
 	end
 
@@ -66,17 +66,17 @@ class Window < Gosu::Window
 			else
 				transparency = 0x33ffffff
 			end
-			find_piece_image(@selected_piece.file_loc).draw(x, y, 0, 1, transparency)
+			find_piece_image(@selected_piece.file_pos).draw(x, y, 0, 1, transparency)
 		end
 	end
 
 	def draw_pieces(pieces = game.board.pieces.reject { |piece| piece == @selected_piece} )
 		pieces.each do |piece|
 			y, x = piece.to_array_indexes.collect { |index| index * 90 }
-			unless @selecter_piece && @moves.include?(piece.location)
-				find_piece_image(piece.file_loc).draw(x, y, ZOrder::PIECES)
+			unless @selecter_piece && @moves.include?(piece.posation)
+				find_piece_image(piece.file_pos).draw(x, y, ZOrder::PIECES)
 			else
-				find_piece_image(piece.file_loc.draw(x, y, 0, 1, 1, 0x33ffffff))
+				find_piece_image(piece.file_pos.draw(x, y, 0, 1, 1, 0x33ffffff))
 			end
 		end
 	end
@@ -91,8 +91,25 @@ class Window < Gosu::Window
 		"#{y.chr}#{x}"	
 	end
 
-	def find_piece_image(file_loc)
-		@piece_images[piece_image_positions]
+	def find_piece_image(file_pos)
+		@piece_images[piece_image_positions.index(file_pos)]
+	end
+
+	def piece_image
+		%w(blackbishop blackking blackknight blackpawn blackqueen blackrook whitebishop whiteking whiteknight whitepawn whitequeen whiterook)
+	end
+
+	def select_upgrade_piece
+		pos = mouse_position(*upgrade_pieces_start_position)
+		return unless pos[1] == "8"
+		pieces = [Queen, Rook, Bishop, Knight]
+		type = pieces[pos[0].ord - 65]
+		game.upgrade_pawn(type) if type
+	end
+
+	def draw_upgrade_pieces(color)
+		y, x = upgrade_pieces_start_position
+		rectangle(x, y, 360, 90)
 	end
 
 
