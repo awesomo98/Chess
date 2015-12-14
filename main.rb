@@ -1,4 +1,5 @@
 require_relative 'z_order'
+require_relative ''
 # require_relative 'game'
 require 'gosu'
 
@@ -42,9 +43,9 @@ class Window < Gosu::Window
 	def draw
 		@background_image.draw(0, 0, ZOrder::BACKGROUND)
 		draw_pieces
-		draw_possible moves
-		draw_selected_piece
-		draw_input_pieces(game.turn.to_s.split("_")[0].to_sym) if game.waiting_for_input
+		# draw_possible moves
+		# draw_selected_piece
+		# draw_input_pieces(game.turn.to_s.split("_")[0].to_sym) if game.waiting_for_input
 	end
 
 	def rectangle(x, y, width, height)
@@ -99,18 +100,18 @@ class Window < Gosu::Window
 		%w(blackbishop blackking blackknight blackpawn blackqueen blackrook whitebishop whiteking whiteknight whitepawn whitequeen whiterook)
 	end
 
-	def select_upgrade_piece
-		pos = mouse_position(*upgrade_pieces_start_position)
-		return unless pos[1] == "8"
-		pieces = [Queen, Rook, Bishop, Knight]
-		type = pieces[pos[0].ord - 65]
-		game.upgrade_pawn(type) if type
-	end
+	# def select_upgrade_piece
+	# 	pos = mouse_position(*upgrade_pieces_start_position)
+	# 	return unless pos[1] == "8"
+	# 	pieces = [Queen, Rook, Bishop, Knight]
+	# 	type = pieces[pos[0].ord - 65]
+	# 	game.upgrade_pawn(type) if type
+	# end
 
-	def draw_upgrade_pieces(color)
-		y, x = upgrade_pieces_start_position
-		rectangle(x, y, 360, 90)
-	end
+	# def draw_upgrade_pieces(color)
+	# 	y, x = upgrade_pieces_start_position
+	# 	rectangle(x, y, 360, 90)
+	# end
 
 
 end
