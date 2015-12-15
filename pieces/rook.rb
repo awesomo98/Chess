@@ -1,3 +1,5 @@
+require_relative 'calculations'
+
 class Rook < Piece
 	include Calculations
 
@@ -6,7 +8,7 @@ class Rook < Piece
 	end
 
 	def can_move?(position_final)
-		forward(position, position_final)
+		position =~ Regexp.new("[#{position_final}]")
 	end
 
 	def can_eat?(enemy_position)

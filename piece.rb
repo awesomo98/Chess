@@ -1,4 +1,4 @@
-class Pieces
+class Piece
 	def initialize
 		@x = @y
 		@image = Gosu::Image.new("images/#{color}/#{piece}")
