@@ -1,5 +1,5 @@
 require_relative 'z_order'
-# require_relative 'game'
+require_relative 'board'
 require 'gosu'
 
 
