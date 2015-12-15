@@ -1,10 +1,6 @@
 require_relative 'z_order'
-<<<<<<< HEAD
 require_relative 'board'
-=======
-require_relative ''
-# require_relative 'game'
->>>>>>> 095159ad06319b7f45957b5eb3549aaf47642f41
+require_relative 'game'
 require 'gosu'
 
 
@@ -13,9 +9,9 @@ class Window < Gosu::Window
 	def initialize
 		super 363, 335
 		self.caption = "Chess Wizard Master"
-		# @game = Game.new
+		@game = Game.new
 		@background_image = Gosu::Image.new("images/Board.jpg")
-		# create_images
+		create_images
 	end
 
 	def needs_cursor?
