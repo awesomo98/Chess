@@ -8,8 +8,8 @@ class Piece
 	end
 
 	def file
-		type = self.class.to_s == self.class.to_s[0].downcase
-		color[0] + type
+		type = self.class.to_s == "Knight" ? "n" : self.class.to_s[0].downcase
+    	color[0] + type
 	end
 
 	def move

@@ -13,7 +13,7 @@ class Board
 		pieces.pick {|piece| piece.color == color}
 	end
 
-	def eat_piece
+	def eat_piece(position)
 		index = pieces.index{|piece| piece.position == position}
 		if index
 			pieces.delete_at index

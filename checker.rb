@@ -1,3 +1,4 @@
+require_relative 'piece'
 class Checker
 	include Calculations
 
@@ -10,7 +11,7 @@ class Checker
 
 	def valid_move?(piece, position_going)
 		return false if piece.position == position_going
-		other_piece = board.piece_place(position_going) || NullPiece.new
+		other_piece = board.piece_place(position_going)# || NullPiece.new
 		return false if same_color?(piece, other_piece)
 		return false unless if other_piece.class == NullPiece
 			piece.can_move?(position_going)

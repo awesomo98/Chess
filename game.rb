@@ -58,7 +58,7 @@ class Game
 	end
 
 	def valid_moves(piece)
-		board_squares.select {|square| checker.valid_move?(piece, square)}
+		board_spaces.select {|square| checker.valid_move?(piece, square)}
 	end
 
 	def checkmate?(color)
@@ -70,7 +70,7 @@ class Game
 	end
 
 	def get_piece(position)
-		board.piece_at(position) || NullPiece.new
+		board.piece_place(position) || NullPiece.new
 	end
 
 	def restart

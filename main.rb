@@ -1,17 +1,17 @@
 require_relative 'z_order'
 require_relative 'board'
 require_relative 'game'
-require_relative 'piece'
+# require_relative 'piece'
 require 'gosu'
 
 
 class Window < Gosu::Window
 	attr_reader :game
 	def initialize
-		super 363, 335
+		super 720, 720
 		self.caption = "Chess Wizard Master"
 		@game = Game.new
-		@background_image = Gosu::Image.new("images/Board.jpg")
+		@background_image = Gosu::Image.new("images/Board.png")
 		create_pieces
 		@font = Gosu::Font.new(20)
 	end
@@ -22,8 +22,8 @@ class Window < Gosu::Window
 
 	def button_down(id)
 		return unless id == Gosu::MsLeft
-		if game.waiting_for_input?
-			select_input_piece
+		if game.waiting_for_upgrade?
+			select_upgrade_piece
 		elsif @selected_piece
 			make_move
 		else
@@ -38,16 +38,16 @@ class Window < Gosu::Window
 
 	def pick_up_piece
 		@selected_piece = game.get_piece(mouse_position)
-		@selected_piece = nil if @selected_piece.instance_of? NullPiece
-		@moves = game.get_legal_moves(@selected_piece) if @selected_piece
+		# @selected_piece = nil if @selected_piece.instance_of? NullPiece
+		@moves = game.valid_moves(@selected_piece) if @selected_piece
 	end
 
 	def draw
 		@background_image.draw(0, 0, ZOrder::BACKGROUND)
 		draw_pieces
-		draw_possible moves
+		draw_possible_moves
 		draw_selected_piece
-		draw_input_pieces(game.turn.to_s.split("_")[0].to_sym) if game.waiting_for_input
+		draw_upgrade_pieces(game.turn.to_s.split("_")[0].to_sym) if game.waiting_for_upgrade?
 		# @font.draw("Turn: ")
 	end
 
@@ -77,7 +77,7 @@ class Window < Gosu::Window
 	def draw_pieces(pieces = game.board.pieces.reject { |piece| piece == @selected_piece} )
 		pieces.each do |piece|
 			y, x = piece.to_array.collect { |index| index * 90 }
-			unless @selecter_piece && @moves.include?(piece.posation)
+			unless @selected_piece && @moves.include?(piece.position)
 				find_piece_image(piece.file).draw(x, y, ZOrder::PIECES)
 			else
 				find_piece_image(piece.file).draw(x, y, 0, 1, 1, 0x33ffffff)
@@ -96,11 +96,11 @@ class Window < Gosu::Window
 	end
 
 	def find_piece_image(file)
-		@piece_images[piece_image.index(file)] if piece_image.index(file)
+		@piece_images[piece_image.index(file)]
 	end
 
 	def piece_image
-		%w(blackbishop blackking blackknight blackpawn blackqueen blackrook whitebishop whiteking whiteknight whitepawn whitequeen whiterook)
+		%w(bb bk bn bp bq br wb wk wn wp wq wr)
 	end
 
 	def select_upgrade_piece

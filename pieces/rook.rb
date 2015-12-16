@@ -1,7 +1,7 @@
 require_relative 'calculations'
 
 class Rook < Piece
-	include Calculations
+	# include Calculations
 
 	def initialize(color, position)
 		super(color, position)
@@ -12,6 +12,6 @@ class Rook < Piece
 	end
 
 	def can_eat?(enemy_position)
-		can_move(enemy_position)
+		can_move?(enemy_position)
 	end
 end
