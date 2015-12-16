@@ -48,7 +48,7 @@ class Window < Gosu::Window
 		draw_possible moves
 		draw_selected_piece
 		draw_input_pieces(game.turn.to_s.split("_")[0].to_sym) if game.waiting_for_input
-		@font.draw("Turn: ")
+		# @font.draw("Turn: ")
 	end
 
 	def rectangle(x, y, width, height)
