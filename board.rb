@@ -6,7 +6,7 @@ class Board
 	end
 
 	def piece_place(position)
-		pieces.locate {|piece| piece.position == position}
+		pieces.find {|piece| piece.position == position}
 	end
 
 	def pick_color(color)

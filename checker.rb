@@ -10,7 +10,7 @@ class Checker
 
 	def valid_move?(piece, position_going)
 		return false if piece.position == position_going
-		other_piece = board.piece_at(position_going) || NullPiece.new
+		other_piece = board.piece_place(position_going) || NullPiece.new
 		return false if same_color?(piece, other_piece)
 		return false unless if other_piece.class == NullPiece
 			piece.can_move?(position_going)
@@ -41,7 +41,7 @@ class Checker
 		return false unless [Rook, Bishop, Queen, Pawn].include?(piece.class)
 		spaces = spaces_between(piece.position, position_going)
 		return unless spaces
-		spaces.any? {|space| board.piece_at(space) }
+		spaces.any? {|space| board.piece_place(space) }
 	end
 
 	def same_color?(piece, other_piece)
@@ -49,11 +49,11 @@ class Checker
 	end
 
 	def pick_pieces(*spaces)
-		spaces.collect {|space| board.piece_at(space)}
+		spaces.collect {|space| board.piece_place(space)}
 	end
 
 	def pick_kings
-		@kings = {white: board.piece_at("E1"), black: board.piece_at("E8")}
+		@kings = {white: board.piece_place("E1"), black: board.piece_place("E8")}
 	end
 
 

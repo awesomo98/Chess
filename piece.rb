@@ -1,7 +1,10 @@
 class Piece
-	def initialize
-		@x = @y
-		@image = Gosu::Image.new("images/#{color}/#{piece}")
+	attr_reader :color
+	attr_accessor :position
+	
+	def initialize(color, position = "A1")
+		@color = color
+		@position = position
 	end
 
 	def file

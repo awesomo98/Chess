@@ -11,7 +11,7 @@ class Window < Gosu::Window
 		self.caption = "Chess Wizard Master"
 		@game = Game.new
 		@background_image = Gosu::Image.new("images/Board.jpg")
-		create_images
+		create_pieces
 	end
 
 	def needs_cursor?
@@ -73,17 +73,17 @@ class Window < Gosu::Window
 
 	def draw_pieces(pieces = game.board.pieces.reject { |piece| piece == @selected_piece} )
 		pieces.each do |piece|
-			y, x = piece.to_array_indexes.collect { |index| index * 90 }
+			y, x = piece.to_array.collect { |index| index * 90 }
 			unless @selecter_piece && @moves.include?(piece.posation)
-				find_piece_image(piece.file_pos).draw(x, y, ZOrder::PIECES)
+				find_piece_image(piece.file).draw(x, y, ZOrder::PIECES)
 			else
-				find_piece_image(piece.file_pos.draw(x, y, 0, 1, 1, 0x33ffffff))
+				find_piece_image(piece.file_pos).draw(x, y, 0, 1, 1, 0x33ffffff)
 			end
 		end
 	end
 
 	def create_pieces
-		@piece_images = piece_image_positions.collect { |path| Gosu::Image.new(self, "assets/#{path}.png", true) }
+		@piece_images = piece_image.collect { |path| Gosu::Image.new(self, "images/#{path}.png", true) }
 	end
 
 	def mouse_position(start_x = 0, start_y = 0)
@@ -92,8 +92,8 @@ class Window < Gosu::Window
 		"#{y.chr}#{x}"	
 	end
 
-	def find_piece_image(file_pos)
-		@piece_images[piece_image_positions.index(file_pos)]
+	def find_piece_image(file)
+		@piece_images[piece_image.index(file)]
 	end
 
 	def piece_image

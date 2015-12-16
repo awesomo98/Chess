@@ -14,7 +14,7 @@ class Setup
 
 	def make_pieces(board)
 		back_row(board, :black, 8)
-		back_row(:white, 1)
+		back_row(board, :white, 1)
 		pawns(board, :black, 7)
 		pawns(board, :white, 2)
 		board
@@ -30,7 +30,7 @@ class Setup
 
 	def pawns(board, color, rank)
 		board << ("A".."H").collect do |file|
-			Pawn.new(color, "#{file}#{rank}")
+			Pawns.new(color, "#{file}#{rank}")
 		end
 	end
 end

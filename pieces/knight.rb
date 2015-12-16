@@ -6,7 +6,8 @@ class Knight < Piece
 	end
 
 	def can_move?(position_final)
-		jump(position, position_final)
+		differences = position_difference(position, position_final).collect(&:abs)
+		differences == [2, 1] || differences == [1, 2]
 	end
 
 	def can_eat?(enemy_position)

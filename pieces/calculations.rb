@@ -5,7 +5,7 @@ module Calculations # call it moves?
 		end
 	end
 
-	def squares_between(position_1, position_2)
+	def squares_between(position_1, position_2) # call it position_change?
 		squares_between_row(position_1, position_2) ||
 		squares_between_diagonal(position_1, position_2)
 	end

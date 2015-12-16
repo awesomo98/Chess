@@ -74,8 +74,8 @@ class Game
 	end
 
 	def restart
-		@board = creator.create
-		@checker = ValidMoveChecker.new(board)
+		@board = @creator.create
+		@checker = Checker.new(board)
 		@turn = :white
 	end
 
