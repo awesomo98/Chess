@@ -1,4 +1,4 @@
-class Pawns < Piece
+class Pawn < Piece
 	include	Calculations
 
 	def initialize(color, position)

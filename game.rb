@@ -1,5 +1,5 @@
 require_relative 'setup'
-require_relative 'checker'
+require_relative 'check_moves'
 require_relative 'pieces/calculations'
 
 class Game
@@ -7,8 +7,8 @@ class Game
 
 	attr_reader :board, :turn, :checker
 
-	def initialize(creator = Setup.new)
-		@creator = creator
+	def initialize(generator = Setup.new)
+		@generator = generator
 		restart
 	end
 
@@ -49,8 +49,10 @@ class Game
 		switch_turns
 	end
 
-	def queue
-		
+	def queue_upgrade_pawn
+	pawn = get_piece(checker.last_move[1])
+    return unless pawn.class == Pawn && ["8", "1"].include?(pawn.position[1])
+    @turn = "#{other_color(turn)}_promotion".to_sym
 	end
 
 	def waiting_for_upgrade?
@@ -74,8 +76,8 @@ class Game
 	end
 
 	def restart
-		@board = @creator.create
-		@checker = Checker.new(board)
+		@board = @generator.create
+		@checker = CheckMoves.new(board)
 		@turn = :white
 	end
 

@@ -9,7 +9,7 @@ class Window < Gosu::Window
 	attr_reader :game
 	def initialize
 		super 720, 720
-		self.caption = "Chess Wizard Master"
+		self.caption = "Bilal Chess Game"
 		@game = Game.new
 		@background_image = Gosu::Image.new("images/Board.png")
 		create_pieces
